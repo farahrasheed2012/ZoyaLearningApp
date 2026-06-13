@@ -6,13 +6,14 @@
 import Foundation
 
 enum AppTab: String, CaseIterable, Identifiable {
-    case learn, trace, flashcards, games, progress
+    case learn, phonics, trace, flashcards, games, progress
 
     var id: String { rawValue }
 
     var title: String {
         switch self {
         case .learn: return "Learn"
+        case .phonics: return "Phonics"
         case .trace: return "Trace"
         case .flashcards: return "Flashcards"
         case .games: return "Games"
@@ -23,6 +24,7 @@ enum AppTab: String, CaseIterable, Identifiable {
     var systemImage: String {
         switch self {
         case .learn: return "book.fill"
+        case .phonics: return "text.book.closed.fill"
         case .trace: return "pencil.tip"
         case .flashcards: return "rectangle.stack.fill"
         case .games: return "gamecontroller.fill"

@@ -40,6 +40,20 @@ enum ZLTheme {
             endPoint: .bottomTrailing
         )
     }
+
+    /// Kid-friendly typography for mini games — larger than default body/headline.
+    enum Game {
+        static let prompt = Font.system(.largeTitle, design: .rounded).weight(.bold)
+        static let subtitle = Font.system(.title2, design: .rounded).weight(.semibold)
+        static let progress = Font.system(.title3, design: .rounded).weight(.medium)
+        static let character = Font.system(size: 56, weight: .bold, design: .rounded)
+        static let tileCharacter = Font.system(size: 44, weight: .bold, design: .rounded)
+        static let emoji = Font.system(size: 80)
+        static let optionEmoji = Font.system(size: 56)
+        static let optionWord = Font.system(.title, design: .rounded).weight(.semibold)
+        static let choice = Font.system(size: 42, weight: .bold, design: .rounded)
+        static let blankSlot = Font.system(size: 56, weight: .bold, design: .rounded)
+    }
 }
 
 struct ScaleButtonStyle: ButtonStyle {

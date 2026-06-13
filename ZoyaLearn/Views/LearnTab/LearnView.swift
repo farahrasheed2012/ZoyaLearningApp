@@ -23,6 +23,7 @@ struct LearnView: View {
                 .padding(.horizontal)
                 .onChange(of: viewModel.filter) { _, _ in
                     viewModel.currentIndex = 0
+                    viewModel.syncDisplayOrder()
                     viewModel.animateCardEntrance()
                 }
 
@@ -51,6 +52,7 @@ struct LearnView: View {
         .navigationTitle("Learn")
         .largeNavTitle()
         .onAppear {
+            viewModel.syncDisplayOrder()
             viewModel.animateCardEntrance()
             if let item = viewModel.currentItem {
                 progressStore.markSeen(item.character)
@@ -92,23 +94,50 @@ struct LearnView: View {
     }
 
     private var navigationRow: some View {
-        HStack(spacing: 24) {
-            Button { viewModel.goPrevious() } label: {
-                Image(systemName: "chevron.left.circle.fill").font(.system(size: 44))
-            }
-            .buttonStyle(ScaleButtonStyle())
-            .accessibilityLabel("Previous")
+        VStack(spacing: 14) {
+            HStack(spacing: 16) {
+                navButton(title: "Previous", systemImage: "chevron.left") {
+                    viewModel.goPrevious()
+                }
+                .accessibilityLabel("Previous letter or number")
 
-            Text("\(viewModel.currentIndex + 1) of \(viewModel.items.count)")
-                .font(.headline)
-                .foregroundStyle(.secondary)
+                Text("\(viewModel.currentIndex + 1) of \(viewModel.items.count)")
+                    .font(.headline)
+                    .foregroundStyle(.secondary)
+                    .frame(minWidth: 88)
 
-            Button { viewModel.goNext() } label: {
-                Image(systemName: "chevron.right.circle.fill").font(.system(size: 44))
+                navButton(title: "Next", systemImage: "chevron.right") {
+                    viewModel.goNext()
+                }
+                .accessibilityLabel("Next letter or number")
             }
-            .buttonStyle(ScaleButtonStyle())
-            .accessibilityLabel("Next")
+
+            HStack(spacing: 12) {
+                navButton(title: "Shuffle", systemImage: "shuffle") {
+                    viewModel.shuffleOrder()
+                    HapticManager.lightImpact()
+                }
+                .accessibilityLabel("Shuffle the learning order")
+
+                navButton(title: "Random", systemImage: "dice.fill") {
+                    viewModel.goRandom()
+                    HapticManager.lightImpact()
+                }
+                .accessibilityLabel("Jump to a random card")
+            }
         }
+        .padding(.horizontal)
+    }
+
+    private func navButton(title: String, systemImage: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Label(title, systemImage: systemImage)
+                .font(.subheadline.weight(.semibold))
+                .padding(.horizontal, 14)
+                .padding(.vertical, 10)
+                .background(Capsule().fill(Color.accentColor.opacity(0.14)))
+        }
+        .buttonStyle(ScaleButtonStyle())
         .foregroundStyle(Color.accentColor)
     }
 

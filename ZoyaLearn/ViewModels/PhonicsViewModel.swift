@@ -1,5 +1,5 @@
 //
-//  LearningViewModel.swift
+//  PhonicsViewModel.swift
 //  ZoyaLearn
 //
 
@@ -7,37 +7,43 @@ import Foundation
 import SwiftUI
 
 @MainActor
-final class LearningViewModel: ObservableObject {
-    @Published var filter: ContentFilter = .all
+final class PhonicsViewModel: ObservableObject {
+    @Published var lengthFilter: PhonicsLength = .all
+    @Published var familyFilter: String?
     @Published var currentIndex: Int = 0
     @Published var cardScale: CGFloat = 0.92
-    @Published var jumpToCharacter: String?
-    @Published private(set) var displayOrder: [LearningItem] = []
+    @Published private(set) var displayOrder: [PhonicsWord] = []
 
-    var items: [LearningItem] { displayOrder }
+    var items: [PhonicsWord] { displayOrder }
 
-    var currentItem: LearningItem? {
+    var availableFamilies: [WordFamilyInfo] {
+        let pool = PhonicsWord.filtered(PhonicsWordData.all, by: lengthFilter)
+        let suffixes = Set(pool.map(\.wordFamily))
+        return PhonicsWordData.families.filter { suffixes.contains($0.suffix) }
+    }
+
+    var selectedFamilyInfo: WordFamilyInfo? {
+        guard let familyFilter else { return nil }
+        return PhonicsWordData.families.first { $0.suffix == familyFilter }
+    }
+
+    var currentWord: PhonicsWord? {
         guard !displayOrder.isEmpty else { return nil }
         let idx = min(max(currentIndex, 0), displayOrder.count - 1)
         return displayOrder[idx]
     }
 
     func syncDisplayOrder(shuffled: Bool = false) {
-        let filtered = LearningItem.filtered(LearningItemData.all, by: filter)
+        if let familyFilter, !availableFamilies.contains(where: { $0.suffix == familyFilter }) {
+            self.familyFilter = nil
+        }
+        let filtered = PhonicsWord.filtered(PhonicsWordData.all, length: lengthFilter, family: familyFilter)
         displayOrder = shuffled ? filtered.shuffled() : filtered
         currentIndex = min(currentIndex, max(displayOrder.count - 1, 0))
     }
 
-    func applyJumpIfNeeded() {
-        guard let target = jumpToCharacter,
-              let idx = displayOrder.firstIndex(where: { $0.character == target }) else { return }
-        currentIndex = idx
-        jumpToCharacter = nil
-        animateCardEntrance()
-    }
-
-    func setFilter(_ filter: ContentFilter) {
-        self.filter = filter
+    func selectFamily(_ suffix: String?) {
+        familyFilter = suffix
         currentIndex = 0
         syncDisplayOrder()
         animateCardEntrance()
@@ -70,10 +76,6 @@ final class LearningViewModel: ObservableObject {
         }
         currentIndex = next
         animateCardEntrance()
-    }
-
-    func jumpTo(_ character: String) {
-        jumpToCharacter = character
     }
 
     func animateCardEntrance() {

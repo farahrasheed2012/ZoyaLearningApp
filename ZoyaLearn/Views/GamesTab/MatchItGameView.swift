@@ -18,35 +18,58 @@ struct MatchItGameView: View {
     private let totalRounds = 10
 
     var body: some View {
-        VStack(spacing: 24) {
+        VStack(spacing: 28) {
             if finished {
-                VStack(spacing: 16) {
+                VStack(spacing: 20) {
+                    Image(systemName: "star.circle.fill")
+                        .font(.system(size: 72))
+                        .foregroundStyle(.yellow)
                     Text("Round complete!")
-                        .font(.largeTitle.bold())
+                        .font(ZLTheme.Game.prompt)
                     Text("Score: \(score)/\(totalRounds)")
-                        .font(.title2)
-                    Button("Play again") { restart() }
-                        .buttonStyle(.borderedProminent)
+                        .font(ZLTheme.Game.subtitle)
+                    Button {
+                        restart()
+                    } label: {
+                        Label("Play again", systemImage: "arrow.clockwise")
+                            .font(ZLTheme.Game.progress)
+                    }
+                    .buttonStyle(.borderedProminent)
                 }
             } else {
-                Text("Question \(round + 1) of \(totalRounds)")
+                Label("Question \(round + 1) of \(totalRounds)", systemImage: "list.number")
+                    .font(ZLTheme.Game.progress)
                     .foregroundStyle(.secondary)
-                Text("Which goes with \(item.character)?")
-                    .font(.title2.bold())
+
+                Label {
+                    Text("Which goes with \(item.character)?")
+                        .font(ZLTheme.Game.prompt)
+                        .multilineTextAlignment(.center)
+                } icon: {
+                    Image(systemName: "questionmark.circle.fill")
+                        .font(.title)
+                        .foregroundStyle(Color.accentColor)
+                }
+                .labelStyle(.titleAndIcon)
+
                 Text(item.exampleEmoji)
-                    .font(.system(size: 64))
+                    .font(ZLTheme.Game.emoji)
 
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
                     ForEach(options) { option in
                         Button {
                             pick(option)
                         } label: {
-                            VStack {
-                                Text(option.exampleEmoji).font(.largeTitle)
-                                Text(option.exampleWord).font(.headline)
+                            VStack(spacing: 10) {
+                                Text(option.exampleEmoji)
+                                    .font(ZLTheme.Game.optionEmoji)
+                                Text(option.exampleWord)
+                                    .font(ZLTheme.Game.optionWord)
+                                    .multilineTextAlignment(.center)
                             }
                             .frame(maxWidth: .infinity)
-                            .padding()
+                            .padding(.vertical, 20)
+                            .padding(.horizontal, 12)
                             .background(RoundedRectangle(cornerRadius: 16).fill(.background))
                         }
                         .buttonStyle(ScaleButtonStyle())

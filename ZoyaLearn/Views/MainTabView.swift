@@ -26,6 +26,7 @@ struct MainTabView: View {
     private var iosLayout: some View {
         TabView(selection: $appState.selectedTab) {
             tabRoot(.learn) { LearnView() }
+            tabRoot(.phonics) { PhonicsView() }
             tabRoot(.trace) { TraceView() }
             tabRoot(.flashcards) { FlashcardsStudyView() }
             tabRoot(.games) { NavigationStack { GamesHubView() } }
@@ -61,6 +62,7 @@ struct MainTabView: View {
     private func detail(for tab: AppTab) -> some View {
         switch tab {
         case .learn: NavigationStack { LearnView() }
+        case .phonics: NavigationStack { PhonicsView() }
         case .trace: NavigationStack { TraceView() }
         case .flashcards: NavigationStack { FlashcardsStudyView() }
         case .games: NavigationStack { GamesHubView() }

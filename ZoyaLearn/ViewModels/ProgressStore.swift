@@ -28,8 +28,10 @@ final class ProgressStore: ObservableObject {
     private static let practiceDaysKey = "zoyalearn.practiceDays"
     private static let sessionSecondsKey = "zoyalearn.totalSessionSeconds"
     private static let flashcardStreakKey = "zoyalearn.flashcardStreak"
+    private static let phonicsProgressKey = "zoyalearn.phonicsProgress"
 
     @Published private(set) var progressByCharacter: [String: CharacterProgress] = [:]
+    @Published private(set) var phonicsProgressByWord: [String: CharacterProgress] = [:]
     @Published private(set) var totalStars: Int = 0
     @Published private(set) var unlockedBadgeIDs: Set<String> = []
     @Published private(set) var currentStreak: Int = 0
@@ -101,6 +103,44 @@ final class ProgressStore: ObservableObject {
         save()
     }
 
+    func phonicsProgress(for word: String) -> CharacterProgress {
+        phonicsProgressByWord[word.lowercased()] ?? CharacterProgress()
+    }
+
+    func markPhonicsSeen(_ word: String) {
+        var p = phonicsProgress(for: word)
+        p.seen = true
+        phonicsProgressByWord[word.lowercased()] = p
+        touchPracticeDay()
+        save()
+    }
+
+    func markPhonicsPracticed(_ word: String) {
+        var p = phonicsProgress(for: word)
+        p.seen = true
+        p.practiced = true
+        phonicsProgressByWord[word.lowercased()] = p
+        touchPracticeDay()
+        save()
+    }
+
+    func markPhonicsMastered(_ word: String) {
+        var p = phonicsProgress(for: word)
+        p.seen = true
+        p.practiced = true
+        p.mastered = true
+        phonicsProgressByWord[word.lowercased()] = p
+        touchPracticeDay()
+        save()
+    }
+
+    var phonicsMasteryPercent: Double {
+        let words = PhonicsWordData.all.map(\.word)
+        guard !words.isEmpty else { return 0 }
+        let mastered = words.filter { phonicsProgress(for: $0).mastered }.count
+        return Double(mastered) / Double(words.count) * 100
+    }
+
     func addStars(_ count: Int, reason: String = "") {
         guard count > 0 else { return }
         totalStars += count
@@ -139,6 +179,7 @@ final class ProgressStore: ObservableObject {
 
     func resetAllProgress() {
         progressByCharacter = [:]
+        phonicsProgressByWord = [:]
         totalStars = 0
         unlockedBadgeIDs = []
         currentStreak = 0
@@ -199,11 +240,18 @@ final class ProgressStore: ObservableObject {
         }
         totalSessionSeconds = UserDefaults.standard.integer(forKey: Self.sessionSecondsKey)
         flashcardStreak = UserDefaults.standard.integer(forKey: Self.flashcardStreakKey)
+        if let data = UserDefaults.standard.data(forKey: Self.phonicsProgressKey),
+           let decoded = try? JSONDecoder().decode([String: CharacterProgress].self, from: data) {
+            phonicsProgressByWord = decoded
+        }
     }
 
     private func save() {
         if let data = try? JSONEncoder().encode(progressByCharacter) {
             UserDefaults.standard.set(data, forKey: Self.progressKey)
+        }
+        if let data = try? JSONEncoder().encode(phonicsProgressByWord) {
+            UserDefaults.standard.set(data, forKey: Self.phonicsProgressKey)
         }
         UserDefaults.standard.set(totalStars, forKey: Self.starsKey)
         UserDefaults.standard.set(Array(unlockedBadgeIDs), forKey: Self.badgesKey)

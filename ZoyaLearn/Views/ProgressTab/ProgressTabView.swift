@@ -47,6 +47,7 @@ struct ProgressTabView: View {
         HStack(spacing: 20) {
             ring(label: "Letters", value: progressStore.letterMasteryPercent, color: .orange)
             ring(label: "Numbers", value: progressStore.numberMasteryPercent, color: .blue)
+            ring(label: "Phonics", value: progressStore.phonicsMasteryPercent, color: .purple)
         }
     }
 

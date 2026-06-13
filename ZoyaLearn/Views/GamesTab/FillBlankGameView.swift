@@ -15,32 +15,32 @@ struct FillBlankGameView: View {
     @State private var round = 0
 
     var body: some View {
-        VStack(spacing: 28) {
-            Text("Fill in the blank")
-                .font(.title2.bold())
+        VStack(spacing: 32) {
+            Label("Fill in the blank", systemImage: "character.textbox")
+                .font(ZLTheme.Game.prompt)
 
-            HStack(spacing: 8) {
+            HStack(spacing: 10) {
                 ForEach(Array(sequence.enumerated()), id: \.offset) { idx, item in
                     if idx == missingIndex && !filled {
                         Text("__")
-                            .font(.system(size: 44, weight: .bold, design: .rounded))
-                            .frame(width: 48)
+                            .font(ZLTheme.Game.blankSlot)
+                            .frame(width: 56)
                     } else {
                         Text(idx == missingIndex && filled ? (choices.first(where: { $0.character == sequence[missingIndex].character })?.character ?? item.character) : item.character)
-                            .font(.system(size: 44, weight: .bold, design: .rounded))
+                            .font(ZLTheme.Game.blankSlot)
                             .foregroundStyle(idx == missingIndex && filled ? .green : .primary)
                     }
                 }
             }
 
-            VStack(spacing: 12) {
+            VStack(spacing: 14) {
                 ForEach(choices) { choice in
                     Button(choice.character) {
                         answer(choice)
                     }
-                    .font(.title2.bold())
+                    .font(ZLTheme.Game.choice)
                     .frame(maxWidth: .infinity)
-                    .padding()
+                    .padding(.vertical, 18)
                     .background(Capsule().fill(Color.accentColor.opacity(0.15)))
                     .buttonStyle(ScaleButtonStyle())
                     .disabled(filled)
@@ -48,7 +48,8 @@ struct FillBlankGameView: View {
             }
             .padding(.horizontal)
 
-            Text("Score: \(score) · Round \(round + 1)")
+            Label("Score: \(score) · Round \(round + 1)", systemImage: "star.fill")
+                .font(ZLTheme.Game.progress)
                 .foregroundStyle(.secondary)
 
             Spacer()

@@ -29,6 +29,15 @@ final class SpeechManager: NSObject, ObservableObject {
         speak("\(item.character)... \(item.exampleWord)")
     }
 
+    func speakWord(_ word: PhonicsWord) {
+        speak(word.word)
+    }
+
+    func soundOutWord(_ word: PhonicsWord) {
+        let parts = word.letterParts.joined(separator: "... ")
+        speak("\(parts)... \(word.word)")
+    }
+
     func speakPrompt(_ text: String) {
         speak(text)
     }
