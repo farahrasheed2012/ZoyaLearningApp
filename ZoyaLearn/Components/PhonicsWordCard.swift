@@ -13,6 +13,7 @@ struct PhonicsWordCard: View {
     var onMarkLearned: (() -> Void)?
 
     private var accent: Color { ZLTheme.accent(for: word.word) }
+    private var blendParts: [BlendPart] { PhonicsPhonemeMap.displayParts(for: word.word) }
 
     var body: some View {
         VStack(spacing: 20) {
@@ -20,7 +21,7 @@ struct PhonicsWordCard: View {
                 .font(.system(size: 72))
                 .accessibilityHidden(true)
 
-            letterBreakdown
+            blendBreakdown
 
             Text(word.hint)
                 .font(.title3)
@@ -40,7 +41,7 @@ struct PhonicsWordCard: View {
                     SpeechManager.shared.speakWord(word)
                 }
 
-                SpeakButton(label: "Sound out") {
+                SpeakButton(label: "Blend") {
                     SpeechManager.shared.soundOutWord(word)
                 }
             }
@@ -67,28 +68,47 @@ struct PhonicsWordCard: View {
         .accessibilityLabel("\(word.word), \(word.hint)")
     }
 
-    private var letterBreakdown: some View {
-        HStack(spacing: 6) {
-            ForEach(Array(word.letterParts.enumerated()), id: \.offset) { index, letter in
-                Text(letter.uppercased())
-                    .font(.system(size: word.letterParts.count <= 2 ? 72 : 56, weight: .bold, design: .rounded))
-                    .foregroundStyle(ZLTheme.accent(for: index))
-                    .frame(minWidth: word.letterParts.count <= 2 ? 52 : 44)
-                    .padding(.vertical, 8)
-                    .padding(.horizontal, 4)
-                    .background(
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(ZLTheme.accent(for: index).opacity(0.12))
-                    )
-
-                if index < word.letterParts.count - 1 {
-                    Text("·")
+    private var blendBreakdown: some View {
+        HStack(spacing: 10) {
+            ForEach(Array(blendParts.enumerated()), id: \.offset) { index, part in
+                if index > 0 {
+                    Text("+")
                         .font(.title.bold())
                         .foregroundStyle(.secondary)
+                        .padding(.top, 8)
                         .accessibilityHidden(true)
+                }
+
+                VStack(spacing: 8) {
+                    Text(part.letters.uppercased())
+                        .font(.system(size: partFontSize, weight: .bold, design: .rounded))
+                        .foregroundStyle(ZLTheme.accent(for: index))
+                        .padding(.horizontal, part.letters.count > 1 ? 16 : 8)
+                        .padding(.vertical, 10)
+                        .background(
+                            RoundedRectangle(cornerRadius: 14)
+                                .fill(ZLTheme.accent(for: index).opacity(0.12))
+                        )
+
+                    Text(part.sound)
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(.secondary)
                 }
             }
         }
-        .accessibilityLabel("Word: \(word.word)")
+        .accessibilityLabel(blendAccessibilityLabel)
+    }
+
+    private var partFontSize: CGFloat {
+        switch word.word.count {
+        case ...2: return 64
+        case 3: return blendParts.count == 2 ? 52 : 44
+        default: return 44
+        }
+    }
+
+    private var blendAccessibilityLabel: String {
+        let chunks = blendParts.map { "\($0.letters) says \($0.sound)" }.joined(separator: ", then ")
+        return "\(word.word): \(chunks)"
     }
 }

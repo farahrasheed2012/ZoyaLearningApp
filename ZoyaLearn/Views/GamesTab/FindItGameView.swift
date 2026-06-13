@@ -5,11 +5,16 @@
 
 import SwiftUI
 
+private struct FindTile: Identifiable {
+    let id = UUID()
+    let character: String
+}
+
 struct FindItGameView: View {
     @EnvironmentObject var progressStore: ProgressStore
     @State private var target = LearningItemData.letters.randomElement()!
-    @State private var tiles: [LearningItem] = []
-    @State private var selected: Set<String> = []
+    @State private var tiles: [FindTile] = []
+    @State private var selected: Set<UUID> = []
     @State private var timeLeft: Double = 15
     @State private var timer: Timer?
     @State private var finished = false
@@ -50,6 +55,7 @@ struct FindItGameView: View {
                     } label: {
                         Text(tile.character)
                             .font(ZLTheme.Game.tileCharacter)
+                            .foregroundStyle(ZLTheme.accent(for: tile.character))
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 22)
                             .background(
@@ -64,9 +70,9 @@ struct FindItGameView: View {
             .padding(.horizontal)
 
             if finished {
-                Label("Great finding!", systemImage: "checkmark.seal.fill")
+                Label(won ? "Great finding!" : "Time's up — try again!", systemImage: won ? "checkmark.seal.fill" : "clock.badge.exclamationmark")
                     .font(ZLTheme.Game.subtitle)
-                    .foregroundStyle(.green)
+                    .foregroundStyle(won ? .green : .orange)
                 Button {
                     startGame()
                 } label: {
@@ -85,15 +91,25 @@ struct FindItGameView: View {
         .onDisappear { timer?.invalidate() }
     }
 
+    private var won: Bool {
+        selected.filter { id in tiles.first(where: { $0.id == id })?.character == target.character }.count >= 4
+    }
+
     private func startGame() {
         timer?.invalidate()
-        target = LearningItemData.all.randomElement()!
+        target = LearningItemData.letters.randomElement()!
         selected = []
         timeLeft = 15
         finished = false
-        var pool = Array(repeating: target, count: 4)
-        pool.append(contentsOf: LearningItemData.all.filter { $0.character != target.character }.shuffled().prefix(8))
+
+        var pool: [FindTile] = (0..<4).map { _ in FindTile(character: target.character) }
+        pool.append(contentsOf: LearningItemData.letters
+            .filter { $0.character != target.character }
+            .shuffled()
+            .prefix(8)
+            .map { FindTile(character: $0.character) })
         tiles = pool.shuffled()
+
         SpeechManager.shared.speakPrompt("Tap all the \(target.character)'s!")
         timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
             Task { @MainActor in
@@ -106,12 +122,12 @@ struct FindItGameView: View {
         }
     }
 
-    private func tap(_ tile: LearningItem, isTarget: Bool) {
+    private func tap(_ tile: FindTile, isTarget: Bool) {
         selected.insert(tile.id)
         if isTarget {
             progressStore.addStars(1)
             HapticManager.lightImpact()
-            if selected.filter({ id in tiles.first(where: { $0.id == id })?.character == target.character }).count >= 4 {
+            if won {
                 timer?.invalidate()
                 finished = true
                 progressStore.addStars(3)

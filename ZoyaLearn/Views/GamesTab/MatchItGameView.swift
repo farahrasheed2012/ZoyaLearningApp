@@ -9,11 +9,12 @@ struct MatchItGameView: View {
     @EnvironmentObject var progressStore: ProgressStore
     @State private var round = 0
     @State private var score = 0
-    @State private var item = LearningItemData.all.randomElement()!
+    @State private var item = LearningItemData.letters.randomElement()!
     @State private var options: [LearningItem] = []
     @State private var shakeWrong = false
     @State private var bounceCorrect = false
     @State private var finished = false
+    @State private var optionPicked = false
 
     private let totalRounds = 10
 
@@ -52,8 +53,9 @@ struct MatchItGameView: View {
                 }
                 .labelStyle(.titleAndIcon)
 
-                Text(item.exampleEmoji)
-                    .font(ZLTheme.Game.emoji)
+                Text(item.character)
+                    .font(ZLTheme.Game.blankSlot)
+                    .foregroundStyle(ZLTheme.accent(for: item.character))
 
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
                     ForEach(options) { option in
@@ -73,6 +75,7 @@ struct MatchItGameView: View {
                             .background(RoundedRectangle(cornerRadius: 16).fill(.background))
                         }
                         .buttonStyle(ScaleButtonStyle())
+                        .disabled(optionPicked)
                     }
                 }
                 .padding(.horizontal)
@@ -89,6 +92,7 @@ struct MatchItGameView: View {
 
     private func pick(_ option: LearningItem) {
         if option.character == item.character {
+            optionPicked = true
             score += 1
             progressStore.addStars(1)
             HapticManager.success()
@@ -114,9 +118,10 @@ struct MatchItGameView: View {
     }
 
     private func newRound() {
-        item = LearningItemData.all.randomElement()!
+        optionPicked = false
+        item = LearningItemData.letters.randomElement()!
         var opts = [item]
-        opts.append(contentsOf: LearningItemData.all.filter { $0.character != item.character }.shuffled().prefix(3))
+        opts.append(contentsOf: LearningItemData.letters.filter { $0.character != item.character }.shuffled().prefix(3))
         options = opts.shuffled()
     }
 

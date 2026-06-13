@@ -5,11 +5,16 @@
 
 import SwiftUI
 
+private struct LetterTile: Identifiable {
+    let id = UUID()
+    var letter: String
+}
+
 struct SpellItGameView: View {
     @EnvironmentObject var progressStore: ProgressStore
     @State private var target = PhonicsWordData.threeLetter.randomElement()!
     @State private var picked: [String] = []
-    @State private var letterPool: [String] = []
+    @State private var letterPool: [LetterTile] = []
     @State private var score = 0
     @State private var round = 0
     @State private var showResult = false
@@ -44,12 +49,12 @@ struct SpellItGameView: View {
             }
 
             LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 10), count: 4), spacing: 10) {
-                ForEach(Array(letterPool.enumerated()), id: \.offset) { index, letter in
-                    if letter.isEmpty {
+                ForEach(letterPool) { tile in
+                    if tile.letter.isEmpty {
                         Color.clear.frame(height: 56)
                     } else {
-                        Button(letter.uppercased()) {
-                            tapLetter(at: index)
+                        Button(tile.letter.uppercased()) {
+                            tapLetter(tile)
                         }
                         .font(ZLTheme.Game.choice)
                         .frame(maxWidth: .infinity)
@@ -98,12 +103,13 @@ struct SpellItGameView: View {
         return "_"
     }
 
-    private func tapLetter(at index: Int) {
+    private func tapLetter(_ tile: LetterTile) {
         guard picked.count < target.letterParts.count else { return }
-        let letter = letterPool[index]
-        guard !letter.isEmpty else { return }
+        guard let index = letterPool.firstIndex(where: { $0.id == tile.id }), !letterPool[index].letter.isEmpty else { return }
+
+        let letter = letterPool[index].letter
         picked.append(letter)
-        letterPool[index] = ""
+        letterPool[index].letter = ""
 
         if picked.count == target.letterParts.count {
             checkAnswer()
@@ -112,8 +118,8 @@ struct SpellItGameView: View {
 
     private func undoLast() {
         guard let last = picked.popLast() else { return }
-        if let emptyIndex = letterPool.firstIndex(of: "") {
-            letterPool[emptyIndex] = last
+        if let index = letterPool.firstIndex(where: { $0.letter.isEmpty }) {
+            letterPool[index].letter = last
         }
     }
 
@@ -142,6 +148,6 @@ struct SpellItGameView: View {
         target = PhonicsWordData.all.randomElement()!
         var pool = target.letterParts
         pool.append(contentsOf: "abcdefghijklmnopqrstuvwxyz".map(String.init).shuffled().prefix(4))
-        letterPool = pool.shuffled()
+        letterPool = pool.shuffled().map { LetterTile(letter: $0) }
     }
 }

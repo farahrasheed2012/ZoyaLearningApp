@@ -11,6 +11,8 @@ struct FillBlankGameView: View {
     @State private var missingIndex = 2
     @State private var choices: [LearningItem] = []
     @State private var filled = false
+    @State private var wasCorrect = false
+    @State private var selectedChoice: LearningItem?
     @State private var score = 0
     @State private var round = 0
 
@@ -25,10 +27,13 @@ struct FillBlankGameView: View {
                         Text("__")
                             .font(ZLTheme.Game.blankSlot)
                             .frame(width: 56)
-                    } else {
-                        Text(idx == missingIndex && filled ? (choices.first(where: { $0.character == sequence[missingIndex].character })?.character ?? item.character) : item.character)
+                    } else if idx == missingIndex && filled, let choice = selectedChoice {
+                        Text(choice.character)
                             .font(ZLTheme.Game.blankSlot)
-                            .foregroundStyle(idx == missingIndex && filled ? .green : .primary)
+                            .foregroundStyle(wasCorrect ? .green : .red)
+                    } else {
+                        Text(item.character)
+                            .font(ZLTheme.Game.blankSlot)
                     }
                 }
             }
@@ -48,6 +53,12 @@ struct FillBlankGameView: View {
             }
             .padding(.horizontal)
 
+            if filled && !wasCorrect {
+                Text("The answer was \(sequence[missingIndex].character)")
+                    .font(ZLTheme.Game.progress)
+                    .foregroundStyle(.secondary)
+            }
+
             Label("Score: \(score) · Round \(round + 1)", systemImage: "star.fill")
                 .font(ZLTheme.Game.progress)
                 .foregroundStyle(.secondary)
@@ -62,6 +73,8 @@ struct FillBlankGameView: View {
 
     private func newRound() {
         filled = false
+        wasCorrect = false
+        selectedChoice = nil
         let start = Int.random(in: 0...(LearningItemData.letters.count - 5))
         sequence = Array(LearningItemData.letters[start..<(start + 5)])
         missingIndex = Int.random(in: 1..<4)
@@ -73,17 +86,18 @@ struct FillBlankGameView: View {
 
     private func answer(_ choice: LearningItem) {
         let correct = sequence[missingIndex]
+        selectedChoice = choice
         filled = true
-        if choice.character == correct.character {
+        wasCorrect = choice.character == correct.character
+        round += 1
+        if wasCorrect {
             score += 1
             progressStore.addStars(1)
             HapticManager.success()
-            withAnimation(.spring) { }
         } else {
             HapticManager.error()
         }
-        round += 1
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
             newRound()
         }
     }

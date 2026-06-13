@@ -33,6 +33,10 @@ struct PhonicsWord: Identifiable, Hashable, Codable {
     var displayFamily: String {
         "-\(wordFamily)"
     }
+
+    var phonemeParts: [String] {
+        PhonicsPhonemeMap.labels(for: word)
+    }
 }
 
 struct WordFamilyInfo: Identifiable, Hashable {

@@ -13,6 +13,7 @@ struct SoundMatchGameView: View {
     @State private var options: [PhonicsWord] = []
     @State private var finished = false
     @State private var shakeWrong = false
+    @State private var optionPicked = false
 
     private let totalRounds = 10
 
@@ -56,6 +57,7 @@ struct SoundMatchGameView: View {
                             .background(RoundedRectangle(cornerRadius: 16).fill(.background))
                         }
                         .buttonStyle(ScaleButtonStyle())
+                        .disabled(optionPicked)
                     }
                 }
                 .padding(.horizontal)
@@ -90,6 +92,7 @@ struct SoundMatchGameView: View {
 
     private func pick(_ option: PhonicsWord) {
         if option.word.lowercased() == target.word.lowercased() {
+            optionPicked = true
             score += 1
             progressStore.addStars(1)
             HapticManager.success()
@@ -111,6 +114,7 @@ struct SoundMatchGameView: View {
     }
 
     private func newRound(playSound: Bool) {
+        optionPicked = false
         target = PhonicsWordData.all.randomElement()!
         var opts = [target]
         opts.append(contentsOf: PhonicsWordData.randomDistractors(excluding: target, count: 3))

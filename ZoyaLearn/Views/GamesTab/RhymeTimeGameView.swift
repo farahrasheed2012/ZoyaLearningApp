@@ -14,6 +14,7 @@ struct RhymeTimeGameView: View {
     @State private var options: [PhonicsWord] = []
     @State private var finished = false
     @State private var shakeWrong = false
+    @State private var optionPicked = false
 
     private let totalRounds = 10
 
@@ -54,6 +55,7 @@ struct RhymeTimeGameView: View {
                             .background(RoundedRectangle(cornerRadius: 16).fill(.background))
                         }
                         .buttonStyle(ScaleButtonStyle())
+                        .disabled(optionPicked)
                     }
                 }
                 .padding(.horizontal)
@@ -88,6 +90,7 @@ struct RhymeTimeGameView: View {
 
     private func pick(_ option: PhonicsWord) {
         if option.word.lowercased() == correctRhyme?.word.lowercased() {
+            optionPicked = true
             score += 1
             progressStore.addStars(1)
             HapticManager.success()
@@ -109,13 +112,20 @@ struct RhymeTimeGameView: View {
     }
 
     private func newRound() {
+        optionPicked = false
         let candidates = PhonicsWordData.threeLetter.filter { PhonicsWordData.randomRhyme(for: $0) != nil }
         target = candidates.randomElement() ?? PhonicsWordData.threeLetter[0]
         correctRhyme = PhonicsWordData.randomRhyme(for: target)
         var opts: [PhonicsWord] = []
         if let rhyme = correctRhyme { opts.append(rhyme) }
-        opts.append(contentsOf: PhonicsWordData.randomDistractors(excluding: target, count: 3)
-            .filter { $0.wordFamily != target.wordFamily })
+        let distractors = PhonicsWordData.randomDistractors(excluding: target, count: 6)
+            .filter { $0.wordFamily != target.wordFamily && $0.word.lowercased() != correctRhyme?.word.lowercased() }
+        opts.append(contentsOf: distractors.prefix(3))
+        while opts.count < 4 {
+            if let extra = PhonicsWordData.all.first(where: { w in !opts.contains(where: { $0.word == w.word }) && w.word != target.word }) {
+                opts.append(extra)
+            } else { break }
+        }
         options = opts.shuffled()
     }
 

@@ -10,6 +10,8 @@ final class SpeechManager: NSObject, ObservableObject {
     static let shared = SpeechManager()
 
     private let synthesizer = AVSpeechSynthesizer()
+    private var utteranceQueue: [AVSpeechUtterance] = []
+    private var isPlayingSequence = false
 
     override private init() {
         super.init()
@@ -17,12 +19,8 @@ final class SpeechManager: NSObject, ObservableObject {
     }
 
     func speak(_ text: String) {
-        synthesizer.stopSpeaking(at: .immediate)
-        let utterance = AVSpeechUtterance(string: text)
-        utterance.rate = 0.4
-        utterance.pitchMultiplier = 1.15
-        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-        synthesizer.speak(utterance)
+        stopSequence()
+        synthesizer.speak(makeUtterance(text, rate: 0.4))
     }
 
     func speakLetterAndWord(_ item: LearningItem) {
@@ -33,9 +31,21 @@ final class SpeechManager: NSObject, ObservableObject {
         speak(word.word)
     }
 
+    /// Onset + rime build, then snap the whole word — flows as connected speech.
     func soundOutWord(_ word: PhonicsWord) {
-        let parts = word.letterParts.joined(separator: "... ")
-        speak("\(parts)... \(word.word)")
+        stopSequence()
+        let parts = PhonicsPhonemeMap.blendParts(for: word.word)
+
+        let build = makeUtterance(parts.build, rate: 0.26)
+        build.preUtteranceDelay = 0.05
+        build.postUtteranceDelay = 0.22
+
+        let snap = makeUtterance(parts.snap, rate: 0.44)
+        snap.pitchMultiplier = 1.18
+
+        utteranceQueue = [build, snap]
+        isPlayingSequence = true
+        speakNextQueued()
     }
 
     func speakPrompt(_ text: String) {
@@ -55,6 +65,34 @@ final class SpeechManager: NSObject, ObservableObject {
     func speakBadgeUnlock(_ badge: Badge) {
         speak("Congratulations! You unlocked \(badge.title)!")
     }
+
+    private func stopSequence() {
+        isPlayingSequence = false
+        utteranceQueue.removeAll()
+        synthesizer.stopSpeaking(at: .immediate)
+    }
+
+    private func makeUtterance(_ text: String, rate: Float) -> AVSpeechUtterance {
+        let utterance = AVSpeechUtterance(string: text)
+        utterance.rate = rate
+        utterance.pitchMultiplier = 1.1
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        return utterance
+    }
+
+    private func speakNextQueued() {
+        guard isPlayingSequence, !utteranceQueue.isEmpty else {
+            isPlayingSequence = false
+            return
+        }
+        synthesizer.speak(utteranceQueue.removeFirst())
+    }
 }
 
-extension SpeechManager: AVSpeechSynthesizerDelegate {}
+extension SpeechManager: AVSpeechSynthesizerDelegate {
+    nonisolated func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        Task { @MainActor in
+            speakNextQueued()
+        }
+    }
+}
