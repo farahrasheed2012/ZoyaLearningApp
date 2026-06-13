@@ -1,0 +1,122 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		Z1B001 /* ZoyaLearnApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F001 /* ZoyaLearnApp.swift */; };
+		Z1B002 /* LearningItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F002 /* LearningItem.swift */; };
+		Z1B003 /* LearningItemData.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F003 /* LearningItemData.swift */; };
+		Z1B004 /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F004 /* Badge.swift */; };
+		Z1B005 /* ProgressStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F005 /* ProgressStore.swift */; };
+		Z1B006 /* LearningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F006 /* LearningViewModel.swift */; };
+		Z1B007 /* ParentDashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F007 /* ParentDashboardViewModel.swift */; };
+		Z1B008 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F008 /* AppState.swift */; };
+		Z1B009 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F009 /* MainTabView.swift */; };
+		Z1B00A /* LearnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F00A /* LearnView.swift */; };
+		Z1B00B /* TraceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F00B /* TraceView.swift */; };
+		Z1B00C /* FlashcardsStudyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F00C /* FlashcardsStudyView.swift */; };
+		Z1B00D /* GamesHubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F00D /* GamesHubView.swift */; };
+		Z1B00E /* MatchItGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F00E /* MatchItGameView.swift */; };
+		Z1B00F /* FindItGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F00F /* FindItGameView.swift */; };
+		Z1B010 /* FillBlankGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F010 /* FillBlankGameView.swift */; };
+		Z1B011 /* ProgressTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F011 /* ProgressTabView.swift */; };
+		Z1B012 /* ParentGateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F012 /* ParentGateView.swift */; };
+		Z1B013 /* ParentDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F013 /* ParentDashboardView.swift */; };
+		Z1B014 /* CharacterCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F014 /* CharacterCard.swift */; };
+		Z1B015 /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F015 /* ConfettiView.swift */; };
+		Z1B016 /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F016 /* BadgeView.swift */; };
+		Z1B017 /* SpeakButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F017 /* SpeakButton.swift */; };
+		Z1B018 /* SpeechManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F018 /* SpeechManager.swift */; };
+		Z1B019 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F019 /* HapticManager.swift */; };
+		Z1B01A /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F01A /* Theme.swift */; };
+		Z1B01B /* PlatformColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F01B /* PlatformColor.swift */; };
+		Z1B01C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = Z2F01C /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		Z0APP /* ZoyaLearn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZoyaLearn.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		Z2F001 /* ZoyaLearnApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoyaLearnApp.swift; sourceTree = "<group>"; };
+		Z2F002 /* LearningItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningItem.swift; sourceTree = "<group>"; };
+		Z2F003 /* LearningItemData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningItemData.swift; sourceTree = "<group>"; };
+		Z2F004 /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
+		Z2F005 /* ProgressStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressStore.swift; sourceTree = "<group>"; };
+		Z2F006 /* LearningViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningViewModel.swift; sourceTree = "<group>"; };
+		Z2F007 /* ParentDashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentDashboardViewModel.swift; sourceTree = "<group>"; };
+		Z2F008 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		Z2F009 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		Z2F00A /* LearnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnView.swift; sourceTree = "<group>"; };
+		Z2F00B /* TraceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceView.swift; sourceTree = "<group>"; };
+		Z2F00C /* FlashcardsStudyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashcardsStudyView.swift; sourceTree = "<group>"; };
+		Z2F00D /* GamesHubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesHubView.swift; sourceTree = "<group>"; };
+		Z2F00E /* MatchItGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchItGameView.swift; sourceTree = "<group>"; };
+		Z2F00F /* FindItGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindItGameView.swift; sourceTree = "<group>"; };
+		Z2F010 /* FillBlankGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillBlankGameView.swift; sourceTree = "<group>"; };
+		Z2F011 /* ProgressTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressTabView.swift; sourceTree = "<group>"; };
+		Z2F012 /* ParentGateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentGateView.swift; sourceTree = "<group>"; };
+		Z2F013 /* ParentDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentDashboardView.swift; sourceTree = "<group>"; };
+		Z2F014 /* CharacterCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCard.swift; sourceTree = "<group>"; };
+		Z2F015 /* ConfettiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
+		Z2F016 /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
+		Z2F017 /* SpeakButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakButton.swift; sourceTree = "<group>"; };
+		Z2F018 /* SpeechManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechManager.swift; sourceTree = "<group>"; };
+		Z2F019 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
+		Z2F01A /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		Z2F01B /* PlatformColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformColor.swift; sourceTree = "<group>"; };
+		Z2F01C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		Z2F01D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		Z1F001 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		Z3G001 = {isa = PBXGroup; children = (Z3G002 /* ZoyaLearn */, Z3G010 /* Products */); sourceTree = "<group>"; };
+		Z3G002 /* ZoyaLearn */ = {isa = PBXGroup; children = (Z3G003 /* App */, Z3G004 /* Models */, Z3G005 /* ViewModels */, Z3G006 /* Views */, Z3G007 /* Components */, Z3G008 /* Utilities */, Z2F01C /* Assets.xcassets */, Z2F01D /* Info.plist */); path = ZoyaLearn; sourceTree = "<group>"; };
+		Z3G003 /* App */ = {isa = PBXGroup; children = (Z2F001 /* ZoyaLearnApp.swift */); path = App; sourceTree = "<group>"; };
+		Z3G004 /* Models */ = {isa = PBXGroup; children = (Z2F002 /* LearningItem.swift */, Z2F003 /* LearningItemData.swift */, Z2F004 /* Badge.swift */); path = Models; sourceTree = "<group>"; };
+		Z3G005 /* ViewModels */ = {isa = PBXGroup; children = (Z2F005 /* ProgressStore.swift */, Z2F006 /* LearningViewModel.swift */, Z2F007 /* ParentDashboardViewModel.swift */, Z2F008 /* AppState.swift */); path = ViewModels; sourceTree = "<group>"; };
+		Z3G006 /* Views */ = {isa = PBXGroup; children = (Z2F009 /* MainTabView.swift */, Z3G011 /* LearnTab */, Z3G012 /* TraceTab */, Z3G013 /* FlashcardsTab */, Z3G014 /* GamesTab */, Z3G015 /* ProgressTab */); path = Views; sourceTree = "<group>"; };
+		Z3G007 /* Components */ = {isa = PBXGroup; children = (Z2F014 /* CharacterCard.swift */, Z2F015 /* ConfettiView.swift */, Z2F016 /* BadgeView.swift */, Z2F017 /* SpeakButton.swift */); path = Components; sourceTree = "<group>"; };
+		Z3G008 /* Utilities */ = {isa = PBXGroup; children = (Z2F018 /* SpeechManager.swift */, Z2F019 /* HapticManager.swift */, Z2F01A /* Theme.swift */, Z2F01B /* PlatformColor.swift */); path = Utilities; sourceTree = "<group>"; };
+		Z3G010 /* Products */ = {isa = PBXGroup; children = (Z0APP /* ZoyaLearn.app */); name = Products; sourceTree = "<group>"; };
+		Z3G011 /* LearnTab */ = {isa = PBXGroup; children = (Z2F00A /* LearnView.swift */); path = LearnTab; sourceTree = "<group>"; };
+		Z3G012 /* TraceTab */ = {isa = PBXGroup; children = (Z2F00B /* TraceView.swift */); path = TraceTab; sourceTree = "<group>"; };
+		Z3G013 /* FlashcardsTab */ = {isa = PBXGroup; children = (Z2F00C /* FlashcardsStudyView.swift */); path = FlashcardsTab; sourceTree = "<group>"; };
+		Z3G014 /* GamesTab */ = {isa = PBXGroup; children = (Z2F00D /* GamesHubView.swift */, Z2F00E /* MatchItGameView.swift */, Z2F00F /* FindItGameView.swift */, Z2F010 /* FillBlankGameView.swift */); path = GamesTab; sourceTree = "<group>"; };
+		Z3G015 /* ProgressTab */ = {isa = PBXGroup; children = (Z2F011 /* ProgressTabView.swift */, Z2F012 /* ParentGateView.swift */, Z2F013 /* ParentDashboardView.swift */); path = ProgressTab; sourceTree = "<group>"; };
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		Z0T001 /* ZoyaLearn */ = {isa = PBXNativeTarget; buildConfigurationList = Z0C003; buildPhases = (Z1E001 /* Sources */, Z1F001 /* Frameworks */, Z1E002 /* Resources */); buildRules = (); dependencies = (); name = ZoyaLearn; productName = ZoyaLearn; productReference = Z0APP; productType = "com.apple.product-type.application"; };
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		Z0B001 /* Project object */ = {isa = PBXProject; attributes = {BuildIndependentTargetsInParallel = 1; LastSwiftUpdateCheck = 1500; LastUpgradeCheck = 1500; }; buildConfigurationList = Z0C001; compatibilityVersion = "Xcode 14.0"; developmentRegion = en; hasScannedForEncodings = 0; knownRegions = (en, Base); mainGroup = Z3G001; productRefGroup = Z3G010; projectDirPath = ""; projectRoot = ""; targets = (Z0T001 /* ZoyaLearn */); };
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		Z1E002 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (Z1B01C /* Assets.xcassets in Resources */); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		Z1E001 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (Z1B001 /* ZoyaLearnApp.swift in Sources */, Z1B002 /* LearningItem.swift in Sources */, Z1B003 /* LearningItemData.swift in Sources */, Z1B004 /* Badge.swift in Sources */, Z1B005 /* ProgressStore.swift in Sources */, Z1B006 /* LearningViewModel.swift in Sources */, Z1B007 /* ParentDashboardViewModel.swift in Sources */, Z1B008 /* AppState.swift in Sources */, Z1B009 /* MainTabView.swift in Sources */, Z1B00A /* LearnView.swift in Sources */, Z1B00B /* TraceView.swift in Sources */, Z1B00C /* FlashcardsStudyView.swift in Sources */, Z1B00D /* GamesHubView.swift in Sources */, Z1B00E /* MatchItGameView.swift in Sources */, Z1B00F /* FindItGameView.swift in Sources */, Z1B010 /* FillBlankGameView.swift in Sources */, Z1B011 /* ProgressTabView.swift in Sources */, Z1B012 /* ParentGateView.swift in Sources */, Z1B013 /* ParentDashboardView.swift in Sources */, Z1B014 /* CharacterCard.swift in Sources */, Z1B015 /* ConfettiView.swift in Sources */, Z1B016 /* BadgeView.swift in Sources */, Z1B017 /* SpeakButton.swift in Sources */, Z1B018 /* SpeechManager.swift in Sources */, Z1B019 /* HapticManager.swift in Sources */, Z1B01A /* Theme.swift in Sources */, Z1B01B /* PlatformColor.swift in Sources */); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		Z0C004 /* Debug */ = {isa = XCBuildConfiguration; buildSettings = {ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; CLANG_ENABLE_OBJC_ARC = YES; COPY_PHASE_STRIP = NO; DEBUG_INFORMATION_FORMAT = dwarf; ENABLE_TESTABILITY = YES; GCC_OPTIMIZATION_LEVEL = 0; IPHONEOS_DEPLOYMENT_TARGET = 17.0; MACOSX_DEPLOYMENT_TARGET = 14.0; MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE; ONLY_ACTIVE_ARCH = YES; SDKROOT = auto; SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG; SWIFT_OPTIMIZATION_LEVEL = "-Onone"; }; name = Debug; };
+		Z0C005 /* Release */ = {isa = XCBuildConfiguration; buildSettings = {ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; CLANG_ENABLE_OBJC_ARC = YES; COPY_PHASE_STRIP = NO; DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym"; ENABLE_NS_ASSERTIONS = NO; GCC_OPTIMIZATION_LEVEL = s; IPHONEOS_DEPLOYMENT_TARGET = 17.0; MACOSX_DEPLOYMENT_TARGET = 14.0; MTL_ENABLE_DEBUG_INFO = NO; SDKROOT = auto; SWIFT_COMPILATION_MODE = wholemodule; VALIDATE_PRODUCT = YES; }; name = Release; };
+		Z0C006 /* Debug */ = {isa = XCBuildConfiguration; buildSettings = {ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon; ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; ENABLE_PREVIEWS = YES; GENERATE_INFOPLIST_FILE = YES; INFOPLIST_FILE = ZoyaLearn/Info.plist; INFOPLIST_KEY_CFBundleDisplayName = ZoyaLearn; INFOPLIST_KEY_LSMinimumSystemVersion = 14.0; INFOPLIST_KEY_NSMicrophoneUsageDescription = "Speech feedback for learning letters and numbers."; IPHONEOS_DEPLOYMENT_TARGET = 17.0; LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/Frameworks"); MACOSX_DEPLOYMENT_TARGET = 14.0; MARKETING_VERSION = 1.0; PRODUCT_BUNDLE_IDENTIFIER = com.zoyalearn.app; PRODUCT_NAME = "$(TARGET_NAME)"; SDKROOT = auto; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx"; SUPPORTS_MACCATALYST = NO; SWIFT_EMIT_LOC_STRINGS = YES; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; }; name = Debug; };
+		Z0C007 /* Release */ = {isa = XCBuildConfiguration; buildSettings = {ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon; ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; ENABLE_PREVIEWS = YES; GENERATE_INFOPLIST_FILE = YES; INFOPLIST_FILE = ZoyaLearn/Info.plist; INFOPLIST_KEY_CFBundleDisplayName = ZoyaLearn; INFOPLIST_KEY_LSMinimumSystemVersion = 14.0; INFOPLIST_KEY_NSMicrophoneUsageDescription = "Speech feedback for learning letters and numbers."; IPHONEOS_DEPLOYMENT_TARGET = 17.0; LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/Frameworks"); MACOSX_DEPLOYMENT_TARGET = 14.0; MARKETING_VERSION = 1.0; PRODUCT_BUNDLE_IDENTIFIER = com.zoyalearn.app; PRODUCT_NAME = "$(TARGET_NAME)"; SDKROOT = auto; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx"; SUPPORTS_MACCATALYST = NO; SWIFT_EMIT_LOC_STRINGS = YES; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; }; name = Release; };
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		Z0C001 /* Build configuration list for PBXProject "ZoyaLearn" */ = {isa = XCConfigurationList; buildConfigurations = (Z0C004 /* Debug */, Z0C005 /* Release */); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		Z0C003 /* Build configuration list for PBXNativeTarget "ZoyaLearn" */ = {isa = XCConfigurationList; buildConfigurations = (Z0C006 /* Debug */, Z0C007 /* Release */); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+/* End XCConfigurationList section */
+	};
+	rootObject = Z0B001 /* Project object */;
+}
