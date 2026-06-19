@@ -24,6 +24,20 @@ struct ParentDashboardView: View {
                     LabeledContent("Streak", value: "\(progressStore.currentStreak) days")
                 }
 
+                Section("This week's letters") {
+                    ForEach(viewModel.weeklyLetterPlan) { item in
+                        HStack {
+                            Text(item.displayPair)
+                                .font(.headline)
+                            Text(item.exampleWord)
+                                .foregroundStyle(.secondary)
+                            Spacer()
+                            Text(viewModel.progressStore.masteryLevel(for: item.character).rawValue)
+                                .font(.caption.weight(.semibold))
+                        }
+                    }
+                }
+
                 Section("Mastery") {
                     ForEach(viewModel.masteryRows) { row in
                         HStack {

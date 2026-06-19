@@ -89,6 +89,15 @@ enum PhonicsPhonemeMap {
         return [parts.build, parts.snap]
     }
 
+    // MARK: - Single-letter sounds (kindergarten phonics)
+
+    static func letterSound(for character: String) -> PhonemeSound {
+        guard let char = character.lowercased().first else {
+            return .init(label: "", speak: "")
+        }
+        return phoneme(for: char, in: String(char), at: 0)
+    }
+
     // MARK: - Private
 
     /// Build then snap phrases for sight / long-vowel words.

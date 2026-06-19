@@ -15,6 +15,7 @@ enum MasteryLevel: String, Codable {
 struct CharacterProgress: Codable, Equatable {
     var seen: Bool = false
     var practiced: Bool = false
+    var quizPassed: Bool = false
     var mastered: Bool = false
 }
 
@@ -83,10 +84,30 @@ final class ProgressStore: ObservableObject {
         save()
     }
 
+    func canEarnMastered(for character: String) -> Bool {
+        guard let item = LearningItemData.all.first(where: { $0.character == character }) else { return false }
+        let p = progress(for: character)
+        if item.type == .number {
+            return p.practiced
+        }
+        return p.practiced && p.quizPassed
+    }
+
+    func markQuizPassed(_ character: String) {
+        var p = progress(for: character)
+        p.seen = true
+        p.quizPassed = true
+        progressByCharacter[character] = p
+        touchPracticeDay()
+        save()
+    }
+
     func markMastered(_ character: String) {
+        guard canEarnMastered(for: character) else { return }
         var p = progress(for: character)
         p.seen = true
         p.practiced = true
+        p.quizPassed = true
         p.mastered = true
         progressByCharacter[character] = p
         touchPracticeDay()

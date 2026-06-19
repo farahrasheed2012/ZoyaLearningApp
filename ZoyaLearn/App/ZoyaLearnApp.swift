@@ -9,19 +9,27 @@ import SwiftUI
 struct ZoyaLearnApp: App {
     @StateObject private var progressStore = ProgressStore()
     @StateObject private var appState = AppState()
+    @StateObject private var avatarStore = AvatarStore.shared
 
     var body: some Scene {
         WindowGroup {
-            MainTabView()
-                .environmentObject(progressStore)
-                .environmentObject(appState)
-                .onAppear {
-                    progressStore.beginSession()
-                    appState.refreshTodaysLetter(progressStore: progressStore)
+            Group {
+                if avatarStore.hasCompletedOnboarding {
+                    WorldRootView()
+                } else {
+                    AvatarPickerView(avatarStore: avatarStore)
                 }
-                .onDisappear {
-                    progressStore.endSession()
-                }
+            }
+            .environmentObject(progressStore)
+            .environmentObject(appState)
+            .environmentObject(avatarStore)
+            .onAppear {
+                progressStore.beginSession()
+                appState.refreshTodaysLesson(progressStore: progressStore)
+            }
+            .onDisappear {
+                progressStore.endSession()
+            }
         }
         #if os(macOS)
         .defaultSize(width: 960, height: 720)

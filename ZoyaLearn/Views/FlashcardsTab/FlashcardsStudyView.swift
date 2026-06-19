@@ -7,10 +7,11 @@ import SwiftUI
 
 struct FlashcardsStudyView: View {
     @EnvironmentObject var progressStore: ProgressStore
-    @State private var deck: [LearningItem] = LearningItemData.all.shuffled()
+    @State private var deck: [LearningItem] = LearningItemData.letters.shuffled()
     @State private var index = 0
     @State private var isFlipped = false
     @State private var flipDegrees: Double = 0
+    @State private var showQuiz = false
 
     private var item: LearningItem { deck[min(index, max(deck.count - 1, 0))] }
 
@@ -47,12 +48,10 @@ struct FlashcardsStudyView: View {
                 .buttonStyle(.bordered)
 
                 Button("I know this!") {
-                    progressStore.markMastered(item.character)
-                    progressStore.recordFlashcardKnown()
-                    HapticManager.success()
-                    nextCard()
+                    handleKnowThis()
                 }
                 .buttonStyle(.borderedProminent)
+                .disabled(!canMarkKnown)
             }
             .buttonStyle(ScaleButtonStyle())
             .padding(.horizontal)
@@ -80,6 +79,36 @@ struct FlashcardsStudyView: View {
             if direction == .right { nextCard() }
         }
         #endif
+        .sheet(isPresented: $showQuiz) {
+            LetterQuizView(
+                item: item,
+                onPass: {
+                    progressStore.markQuizPassed(item.character)
+                    progressStore.markMastered(item.character)
+                    progressStore.recordFlashcardKnown()
+                    showQuiz = false
+                    nextCard()
+                },
+                onDismiss: { showQuiz = false }
+            )
+        }
+    }
+
+    private var canMarkKnown: Bool {
+        progressStore.canEarnMastered(for: item.character)
+            || (item.type == .letter && progressStore.progress(for: item.character).practiced && !progressStore.progress(for: item.character).quizPassed)
+    }
+
+    private func handleKnowThis() {
+        let p = progressStore.progress(for: item.character)
+        if item.type == .letter, p.practiced, !p.quizPassed {
+            showQuiz = true
+        } else if progressStore.canEarnMastered(for: item.character) {
+            progressStore.markMastered(item.character)
+            progressStore.recordFlashcardKnown()
+            HapticManager.success()
+            nextCard()
+        }
     }
 
     @ViewBuilder
@@ -95,9 +124,21 @@ struct FlashcardsStudyView: View {
                     .padding(.horizontal)
             } else {
                 Text(item.exampleEmoji).font(.system(size: 72))
-                Text(item.character)
-                    .font(.system(size: 88, weight: .bold, design: .rounded))
-                    .foregroundStyle(ZLTheme.accent(for: item.character))
+                HStack(alignment: .firstTextBaseline, spacing: 8) {
+                    Text(item.character)
+                        .font(.system(size: 72, weight: .bold, design: .rounded))
+                        .foregroundStyle(ZLTheme.accent(for: item.character))
+                    if item.type == .letter {
+                        Text(item.lowercaseCharacter)
+                            .font(.system(size: 52, weight: .bold, design: .rounded))
+                            .foregroundStyle(ZLTheme.accent(for: item.character).opacity(0.85))
+                    }
+                }
+                if item.type == .letter {
+                    Text("/\(item.soundLabel)/")
+                        .font(.headline)
+                        .foregroundStyle(ZLTheme.grass)
+                }
                 Text("Tap to flip")
                     .font(.caption)
                     .foregroundStyle(.secondary)

@@ -16,8 +16,27 @@ struct LearningItem: Identifiable, Hashable, Codable {
     let type: ItemType
     let exampleWord: String
     let exampleEmoji: String
+    let illustrationName: String
     let phonetic: String
     let funFact: String
+
+    init(
+        character: String,
+        type: ItemType,
+        exampleWord: String,
+        exampleEmoji: String,
+        illustrationName: String? = nil,
+        phonetic: String,
+        funFact: String
+    ) {
+        self.character = character
+        self.type = type
+        self.exampleWord = exampleWord
+        self.exampleEmoji = exampleEmoji
+        self.illustrationName = illustrationName ?? exampleWord.lowercased()
+        self.phonetic = phonetic
+        self.funFact = funFact
+    }
 }
 
 enum ContentFilter: String, CaseIterable, Identifiable {
@@ -29,6 +48,28 @@ enum ContentFilter: String, CaseIterable, Identifiable {
 }
 
 extension LearningItem {
+    /// Lowercase form for letters (e.g. "a"); numbers unchanged.
+    var lowercaseCharacter: String {
+        type == .letter ? character.lowercased() : character
+    }
+
+    /// Uppercase + lowercase pair for display (e.g. "Aa").
+    var displayPair: String {
+        type == .letter ? "\(character)\(lowercaseCharacter)" : character
+    }
+
+    /// Kid-friendly sound label shown in UI (e.g. "b").
+    var soundLabel: String {
+        guard type == .letter else { return phonetic }
+        return PhonicsPhonemeMap.letterSound(for: character).label
+    }
+
+    /// Spoken phoneme for text-to-speech (e.g. "buh").
+    var soundSpeak: String {
+        guard type == .letter else { return phonetic }
+        return PhonicsPhonemeMap.letterSound(for: character).speak
+    }
+
     static func filtered(_ items: [LearningItem], by filter: ContentFilter) -> [LearningItem] {
         switch filter {
         case .letters: return items.filter { $0.type == .letter }

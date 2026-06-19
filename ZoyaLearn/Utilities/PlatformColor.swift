@@ -27,3 +27,22 @@ enum ZLPlatformColor {
         #endif
     }
 }
+
+/// Cross-platform toolbar placements (topBarLeading/Trailing are iOS-only).
+enum ZLToolbar {
+    static var leading: ToolbarItemPlacement {
+        #if os(iOS)
+        .topBarLeading
+        #else
+        .navigation
+        #endif
+    }
+
+    static var trailing: ToolbarItemPlacement {
+        #if os(iOS)
+        .topBarTrailing
+        #else
+        .primaryAction
+        #endif
+    }
+}

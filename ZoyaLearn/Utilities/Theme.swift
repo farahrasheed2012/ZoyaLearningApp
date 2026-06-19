@@ -1,6 +1,6 @@
 //
 //  Theme.swift
-//  ZoyaLearn
+//  ZoyaLearn — Bluey-inspired warm palette
 //
 
 import SwiftUI
@@ -9,16 +9,17 @@ enum ZLTheme {
     static let cornerRadius: CGFloat = 24
     static let shadowRadius: CGFloat = 8
 
-    static let accentColors: [Color] = [
-        Color(red: 1.0, green: 0.45, blue: 0.45),
-        Color(red: 1.0, green: 0.72, blue: 0.30),
-        Color(red: 0.98, green: 0.88, blue: 0.35),
-        Color(red: 0.55, green: 0.85, blue: 0.55),
-        Color(red: 0.45, green: 0.78, blue: 0.95),
-        Color(red: 0.62, green: 0.55, blue: 0.95),
-        Color(red: 0.95, green: 0.55, blue: 0.82),
-        Color(red: 0.55, green: 0.90, blue: 0.85),
-    ]
+    // Palette
+    static let cream = Color(red: 0.992, green: 0.965, blue: 0.890)
+    static let warmSky = Color(red: 0.659, green: 0.812, blue: 0.918)
+    static let grass = Color(red: 0.482, green: 0.749, blue: 0.416)
+    static let sun = Color(red: 0.961, green: 0.784, blue: 0.259)
+    static let earth = Color(red: 0.769, green: 0.529, blue: 0.353)
+    static let blush = Color(red: 0.949, green: 0.643, blue: 0.569)
+    static let ink = Color(red: 0.239, green: 0.169, blue: 0.122)
+    static let whiteSoft = Color(red: 1.0, green: 0.992, blue: 0.969)
+
+    static let accentColors: [Color] = [blush, sun, grass, warmSky, earth]
 
     static func accent(for index: Int) -> Color {
         accentColors[index % accentColors.count]
@@ -31,17 +32,17 @@ enum ZLTheme {
 
     static var backgroundGradient: LinearGradient {
         LinearGradient(
-            colors: [
-                Color(red: 0.95, green: 0.97, blue: 1.0),
-                Color(red: 0.98, green: 0.94, blue: 1.0),
-                Color(red: 0.94, green: 0.98, blue: 0.96),
-            ],
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing
+            colors: [warmSky.opacity(0.45), cream, grass.opacity(0.18)],
+            startPoint: .top,
+            endPoint: .bottom
         )
     }
 
-    /// Kid-friendly typography for mini games — larger than default body/headline.
+    static var displayFont: Font { .system(.largeTitle, design: .rounded).weight(.bold) }
+    static var headingFont: Font { .system(.title2, design: .rounded).weight(.bold) }
+    static var bodyFont: Font { .system(.body, design: .rounded).weight(.semibold) }
+    static var letterFont: Font { .system(size: 160, weight: .bold, design: .rounded) }
+
     enum Game {
         static let prompt = Font.system(.largeTitle, design: .rounded).weight(.bold)
         static let subtitle = Font.system(.title2, design: .rounded).weight(.semibold)
@@ -60,19 +61,35 @@ struct ScaleButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .scaleEffect(configuration.isPressed ? 0.96 : 1)
-            .animation(.easeOut(duration: 0.12), value: configuration.isPressed)
+            .animation(.spring(response: 0.3, dampingFraction: 0.4), value: configuration.isPressed)
+    }
+}
+
+struct HandDrawnCard: ViewModifier {
+    var fill: Color = ZLTheme.whiteSoft
+
+    func body(content: Content) -> some View {
+        content
+            .padding(24)
+            .background(
+                RoundedRectangle(cornerRadius: ZLTheme.cornerRadius)
+                    .fill(fill)
+                    .shadow(color: ZLTheme.earth.opacity(0.15), radius: ZLTheme.shadowRadius, y: 4)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: ZLTheme.cornerRadius)
+                    .stroke(ZLTheme.earth.opacity(0.35), lineWidth: 2)
+            )
     }
 }
 
 extension View {
-    func zlCardStyle(accent: Color = ZLTheme.accentColors[0]) -> some View {
-        self
-            .padding(24)
-            .background(
-                RoundedRectangle(cornerRadius: ZLTheme.cornerRadius)
-                    .fill(.background)
-                    .shadow(color: accent.opacity(0.18), radius: ZLTheme.shadowRadius, y: 4)
-            )
+    func zlCardStyle(accent: Color = ZLTheme.grass) -> some View {
+        modifier(HandDrawnCard())
+    }
+
+    func zlInkText() -> some View {
+        foregroundStyle(ZLTheme.ink)
     }
 
     func inlineNavTitle() -> some View {
@@ -89,5 +106,24 @@ extension View {
         #else
         self
         #endif
+    }
+
+    func wobble(wrong: Bool) -> some View {
+        modifier(WobbleModifier(active: wrong))
+    }
+}
+
+private struct WobbleModifier: ViewModifier {
+    let active: Bool
+    @State private var phase = false
+
+    func body(content: Content) -> some View {
+        content
+            .offset(x: active && phase ? 6 : 0)
+            .onChange(of: active) { _, on in
+                guard on else { return }
+                withAnimation(.default.repeatCount(3, autoreverses: true)) { phase.toggle() }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { phase = false }
+            }
     }
 }

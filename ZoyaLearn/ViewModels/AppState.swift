@@ -37,13 +37,31 @@ enum AppTab: String, CaseIterable, Identifiable {
 final class AppState: ObservableObject {
     @Published var selectedTab: AppTab = .learn
     @Published var todaysLetter: LearningItem?
+    @Published var todaysLesson: TodaysLesson?
+    @Published var lessonFocusCharacter: String?
+    @Published var pendingLessonDestination: MapLocation?
+
+    func refreshTodaysLesson(progressStore: ProgressStore) {
+        todaysLesson = TodaysLessonPlanner.make(progressStore: progressStore)
+        todaysLetter = todaysLesson?.letter
+    }
+
+    func beginLessonStep(_ step: LessonStep) {
+        guard let lesson = todaysLesson else { return }
+        lessonFocusCharacter = lesson.letter.character
+        pendingLessonDestination = step.mapLocation
+    }
+
+    func clearLessonNavigation() {
+        pendingLessonDestination = nil
+    }
 
     func refreshTodaysLetter(progressStore: ProgressStore) {
-        todaysLetter = LearningItemData.randomUnmastered(from: LearningItemData.all, mastered: progressStore.masteredCharacters)
+        refreshTodaysLesson(progressStore: progressStore)
     }
 
     func showTodaysLetter(progressStore: ProgressStore) {
-        refreshTodaysLetter(progressStore: progressStore)
+        refreshTodaysLesson(progressStore: progressStore)
         selectedTab = .learn
         if let item = todaysLetter {
             NotificationCenter.default.post(name: .zlJumpToCharacter, object: item.character)

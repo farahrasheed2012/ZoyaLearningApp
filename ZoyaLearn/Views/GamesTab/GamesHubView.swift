@@ -71,6 +71,43 @@ enum MiniGame: String, CaseIterable, Identifiable {
         }
     }
 
+    /// Backyard-themed labels for the world map.
+    var backyardTitle: String {
+        switch self {
+        case .matchIt: return "Catch!"
+        case .findIt: return "Treasure Hunt"
+        case .fillBlank: return "Stepping Stones"
+        case .memoryMatch: return "Memory Meadow"
+        case .soundMatch: return "Sound Garden"
+        case .spellIt: return "Spell Stones"
+        case .rhymeTime: return "Rhyme River"
+        }
+    }
+
+    var backyardSubtitle: String {
+        switch self {
+        case .matchIt: return "Zoya throws a ball — tap the right bush!"
+        case .findIt: return "Find all the matching letters in the garden"
+        case .fillBlank: return "Hop across the creek with the right stone"
+        case .memoryMatch: return "Flip cards to match letters and pictures"
+        case .soundMatch: return "Listen and pick the right word"
+        case .spellIt: return "Tap letters to spell the word you see"
+        case .rhymeTime: return "Find the word that rhymes"
+        }
+    }
+
+    var backyardEmoji: String {
+        switch self {
+        case .matchIt: return "⚽️"
+        case .findIt: return "🌸"
+        case .fillBlank: return "🪨"
+        case .memoryMatch: return "🃏"
+        case .soundMatch: return "👂"
+        case .spellIt: return "✏️"
+        case .rhymeTime: return "🎵"
+        }
+    }
+
     @ViewBuilder
     var destination: some View {
         switch self {

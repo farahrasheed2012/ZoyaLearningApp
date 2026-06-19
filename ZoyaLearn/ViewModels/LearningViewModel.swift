@@ -8,7 +8,7 @@ import SwiftUI
 
 @MainActor
 final class LearningViewModel: ObservableObject {
-    @Published var filter: ContentFilter = .all
+    @Published var filter: ContentFilter = .letters
     @Published var currentIndex: Int = 0
     @Published var cardScale: CGFloat = 0.92
     @Published var jumpToCharacter: String?

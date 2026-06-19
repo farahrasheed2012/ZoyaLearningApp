@@ -25,7 +25,7 @@
 		Z1B011 /* ProgressTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F011 /* ProgressTabView.swift */; };
 		Z1B012 /* ParentGateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F012 /* ParentGateView.swift */; };
 		Z1B013 /* ParentDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F013 /* ParentDashboardView.swift */; };
-		Z1B014 /* CharacterCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F014 /* CharacterCard.swift */; };
+		Z1B014 /* CharacterCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F014 /* CharacterCardView.swift */; };
 		Z1B015 /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F015 /* ConfettiView.swift */; };
 		Z1B016 /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F016 /* BadgeView.swift */; };
 		Z1B017 /* SpeakButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F017 /* SpeakButton.swift */; };
@@ -44,6 +44,22 @@
 		Z1B024 /* RhymeTimeGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F025 /* RhymeTimeGameView.swift */; };
 		Z1B025 /* MemoryMatchGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F026 /* MemoryMatchGameView.swift */; };
 		Z1B026 /* PhonicsPhonemeMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F027 /* PhonicsPhonemeMap.swift */; };
+		Z1B027 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F028 /* Avatar.swift */; };
+		Z1B028 /* WorldMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F029 /* WorldMapViewModel.swift */; };
+		Z1B029 /* ZoyaAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F02A /* ZoyaAvatarView.swift */; };
+		Z1B02A /* StarJarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F02B /* StarJarView.swift */; };
+		Z1B02C /* MapLocationNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F02D /* MapLocationNode.swift */; };
+		Z1B02D /* WorldMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F02E /* WorldMapView.swift */; };
+		Z1B02E /* WorldRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F02F /* WorldRootView.swift */; };
+		Z1B02F /* AvatarPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F030 /* AvatarPickerView.swift */; };
+		Z1B030 /* LetterHouseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F031 /* LetterHouseView.swift */; };
+		Z1B031 /* ArtCornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F032 /* ArtCornerView.swift */; };
+		Z1B032 /* LibraryTreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F033 /* LibraryTreeView.swift */; };
+		Z1B033 /* BackyardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F034 /* BackyardView.swift */; };
+		Z1B034 /* TrophyShedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F035 /* TrophyShedView.swift */; };
+		Z1B035 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F036 /* SoundManager.swift */; };
+		Z1B036 /* TodaysLesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F037 /* TodaysLesson.swift */; };
+		Z1B037 /* LetterQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Z2F038 /* LetterQuizView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,7 +83,7 @@
 		Z2F011 /* ProgressTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressTabView.swift; sourceTree = "<group>"; };
 		Z2F012 /* ParentGateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentGateView.swift; sourceTree = "<group>"; };
 		Z2F013 /* ParentDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentDashboardView.swift; sourceTree = "<group>"; };
-		Z2F014 /* CharacterCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCard.swift; sourceTree = "<group>"; };
+		Z2F014 /* CharacterCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCardView.swift; sourceTree = "<group>"; };
 		Z2F015 /* ConfettiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
 		Z2F016 /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
 		Z2F017 /* SpeakButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakButton.swift; sourceTree = "<group>"; };
@@ -87,6 +103,22 @@
 		Z2F025 /* RhymeTimeGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RhymeTimeGameView.swift; sourceTree = "<group>"; };
 		Z2F026 /* MemoryMatchGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryMatchGameView.swift; sourceTree = "<group>"; };
 		Z2F027 /* PhonicsPhonemeMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhonicsPhonemeMap.swift; sourceTree = "<group>"; };
+		Z2F028 /* Avatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
+		Z2F029 /* WorldMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldMapViewModel.swift; sourceTree = "<group>"; };
+		Z2F02A /* ZoyaAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoyaAvatarView.swift; sourceTree = "<group>"; };
+		Z2F02B /* StarJarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarJarView.swift; sourceTree = "<group>"; };
+		Z2F02D /* MapLocationNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldMap/MapLocationNode.swift; sourceTree = "<group>"; };
+		Z2F02E /* WorldMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldMap/WorldMapView.swift; sourceTree = "<group>"; };
+		Z2F02F /* WorldRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldMap/WorldRootView.swift; sourceTree = "<group>"; };
+		Z2F030 /* AvatarPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding/AvatarPickerView.swift; sourceTree = "<group>"; };
+		Z2F031 /* LetterHouseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterHouse/LetterHouseView.swift; sourceTree = "<group>"; };
+		Z2F032 /* ArtCornerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtCorner/ArtCornerView.swift; sourceTree = "<group>"; };
+		Z2F033 /* LibraryTreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTree/LibraryTreeView.swift; sourceTree = "<group>"; };
+		Z2F034 /* BackyardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Backyard/BackyardView.swift; sourceTree = "<group>"; };
+		Z2F035 /* TrophyShedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrophyShed/TrophyShedView.swift; sourceTree = "<group>"; };
+		Z2F036 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		Z2F037 /* TodaysLesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaysLesson.swift; sourceTree = "<group>"; };
+		Z2F038 /* LetterQuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterQuizView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,11 +129,11 @@
 		Z3G001 = {isa = PBXGroup; children = (Z3G002 /* ZoyaLearn */, Z3G010 /* Products */); sourceTree = "<group>"; };
 		Z3G002 /* ZoyaLearn */ = {isa = PBXGroup; children = (Z3G003 /* App */, Z3G004 /* Models */, Z3G005 /* ViewModels */, Z3G006 /* Views */, Z3G007 /* Components */, Z3G008 /* Utilities */, Z2F01C /* Assets.xcassets */, Z2F01D /* Info.plist */); path = ZoyaLearn; sourceTree = "<group>"; };
 		Z3G003 /* App */ = {isa = PBXGroup; children = (Z2F001 /* ZoyaLearnApp.swift */); path = App; sourceTree = "<group>"; };
-		Z3G004 /* Models */ = {isa = PBXGroup; children = (Z2F002 /* LearningItem.swift */, Z2F003 /* LearningItemData.swift */, Z2F004 /* Badge.swift */, Z2F01E /* PhonicsWord.swift */, Z2F01F /* PhonicsWordData.swift */); path = Models; sourceTree = "<group>"; };
-		Z3G005 /* ViewModels */ = {isa = PBXGroup; children = (Z2F005 /* ProgressStore.swift */, Z2F006 /* LearningViewModel.swift */, Z2F007 /* ParentDashboardViewModel.swift */, Z2F008 /* AppState.swift */, Z2F020 /* PhonicsViewModel.swift */); path = ViewModels; sourceTree = "<group>"; };
-		Z3G006 /* Views */ = {isa = PBXGroup; children = (Z2F009 /* MainTabView.swift */, Z3G011 /* LearnTab */, Z3G016 /* PhonicsTab */, Z3G012 /* TraceTab */, Z3G013 /* FlashcardsTab */, Z3G014 /* GamesTab */, Z3G015 /* ProgressTab */); path = Views; sourceTree = "<group>"; };
-		Z3G007 /* Components */ = {isa = PBXGroup; children = (Z2F014 /* CharacterCard.swift */, Z2F015 /* ConfettiView.swift */, Z2F016 /* BadgeView.swift */, Z2F017 /* SpeakButton.swift */, Z2F022 /* PhonicsWordCard.swift */); path = Components; sourceTree = "<group>"; };
-		Z3G008 /* Utilities */ = {isa = PBXGroup; children = (Z2F018 /* SpeechManager.swift */, Z2F019 /* HapticManager.swift */, Z2F01A /* Theme.swift */, Z2F01B /* PlatformColor.swift */, Z2F027 /* PhonicsPhonemeMap.swift */); path = Utilities; sourceTree = "<group>"; };
+		Z3G004 /* Models */ = {isa = PBXGroup; children = (Z2F002 /* LearningItem.swift */, Z2F003 /* LearningItemData.swift */, Z2F004 /* Badge.swift */, Z2F028 /* Avatar.swift */, Z2F01E /* PhonicsWord.swift */, Z2F01F /* PhonicsWordData.swift */, Z2F037 /* TodaysLesson.swift */); path = Models; sourceTree = "<group>"; };
+		Z3G005 /* ViewModels */ = {isa = PBXGroup; children = (Z2F005 /* ProgressStore.swift */, Z2F006 /* LearningViewModel.swift */, Z2F007 /* ParentDashboardViewModel.swift */, Z2F008 /* AppState.swift */, Z2F020 /* PhonicsViewModel.swift */, Z2F029 /* WorldMapViewModel.swift */); path = ViewModels; sourceTree = "<group>"; };
+		Z3G006 /* Views */ = {isa = PBXGroup; children = (Z2F02F /* WorldRootView.swift */, Z2F02E /* WorldMapView.swift */, Z2F02D /* MapLocationNode.swift */, Z2F030 /* AvatarPickerView.swift */, Z2F031 /* LetterHouseView.swift */, Z2F032 /* ArtCornerView.swift */, Z2F033 /* LibraryTreeView.swift */, Z2F034 /* BackyardView.swift */, Z2F035 /* TrophyShedView.swift */, Z2F009 /* MainTabView.swift */, Z3G011 /* LearnTab */, Z3G016 /* PhonicsTab */, Z3G012 /* TraceTab */, Z3G013 /* FlashcardsTab */, Z3G014 /* GamesTab */, Z3G015 /* ProgressTab */); path = Views; sourceTree = "<group>"; };
+		Z3G007 /* Components */ = {isa = PBXGroup; children = (Z2F014 /* CharacterCardView.swift */, Z2F038 /* LetterQuizView.swift */, Z2F02A /* ZoyaAvatarView.swift */, Z2F02B /* StarJarView.swift */, Z2F015 /* ConfettiView.swift */, Z2F016 /* BadgeView.swift */, Z2F017 /* SpeakButton.swift */, Z2F022 /* PhonicsWordCard.swift */); path = Components; sourceTree = "<group>"; };
+		Z3G008 /* Utilities */ = {isa = PBXGroup; children = (Z2F018 /* SpeechManager.swift */, Z2F036 /* SoundManager.swift */, Z2F019 /* HapticManager.swift */, Z2F01A /* Theme.swift */, Z2F01B /* PlatformColor.swift */, Z2F027 /* PhonicsPhonemeMap.swift */); path = Utilities; sourceTree = "<group>"; };
 		Z3G010 /* Products */ = {isa = PBXGroup; children = (Z0APP /* ZoyaLearn.app */); name = Products; sourceTree = "<group>"; };
 		Z3G011 /* LearnTab */ = {isa = PBXGroup; children = (Z2F00A /* LearnView.swift */); path = LearnTab; sourceTree = "<group>"; };
 		Z3G016 /* PhonicsTab */ = {isa = PBXGroup; children = (Z2F021 /* PhonicsView.swift */); path = PhonicsTab; sourceTree = "<group>"; };
@@ -124,7 +156,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		Z1E001 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (Z1B001 /* ZoyaLearnApp.swift in Sources */, Z1B002 /* LearningItem.swift in Sources */, Z1B003 /* LearningItemData.swift in Sources */, Z1B004 /* Badge.swift in Sources */, Z1B005 /* ProgressStore.swift in Sources */, Z1B006 /* LearningViewModel.swift in Sources */, Z1B007 /* ParentDashboardViewModel.swift in Sources */, Z1B008 /* AppState.swift in Sources */, Z1B009 /* MainTabView.swift in Sources */, Z1B00A /* LearnView.swift in Sources */, Z1B00B /* TraceView.swift in Sources */, Z1B00C /* FlashcardsStudyView.swift in Sources */, Z1B00D /* GamesHubView.swift in Sources */, Z1B00E /* MatchItGameView.swift in Sources */, Z1B00F /* FindItGameView.swift in Sources */, Z1B010 /* FillBlankGameView.swift in Sources */, Z1B011 /* ProgressTabView.swift in Sources */, Z1B012 /* ParentGateView.swift in Sources */, Z1B013 /* ParentDashboardView.swift in Sources */, Z1B014 /* CharacterCard.swift in Sources */, Z1B015 /* ConfettiView.swift in Sources */, Z1B016 /* BadgeView.swift in Sources */, Z1B017 /* SpeakButton.swift in Sources */, Z1B018 /* SpeechManager.swift in Sources */, Z1B019 /* HapticManager.swift in Sources */, Z1B01A /* Theme.swift in Sources */, Z1B01B /* PlatformColor.swift in Sources */, Z1B01D /* PhonicsWord.swift in Sources */, Z1B01E /* PhonicsWordData.swift in Sources */, Z1B01F /* PhonicsViewModel.swift in Sources */, Z1B020 /* PhonicsView.swift in Sources */, Z1B021 /* PhonicsWordCard.swift in Sources */, Z1B022 /* SoundMatchGameView.swift in Sources */, Z1B023 /* SpellItGameView.swift in Sources */, Z1B024 /* RhymeTimeGameView.swift in Sources */, Z1B025 /* MemoryMatchGameView.swift in Sources */, Z1B026 /* PhonicsPhonemeMap.swift in Sources */); runOnlyForDeploymentPostprocessing = 0; };
+		Z1E001 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (Z1B001 /* ZoyaLearnApp.swift in Sources */, Z1B002 /* LearningItem.swift in Sources */, Z1B003 /* LearningItemData.swift in Sources */, Z1B004 /* Badge.swift in Sources */, Z1B005 /* ProgressStore.swift in Sources */, Z1B006 /* LearningViewModel.swift in Sources */, Z1B007 /* ParentDashboardViewModel.swift in Sources */, Z1B008 /* AppState.swift in Sources */, Z1B009 /* MainTabView.swift in Sources */, Z1B00A /* LearnView.swift in Sources */, Z1B00B /* TraceView.swift in Sources */, Z1B00C /* FlashcardsStudyView.swift in Sources */, Z1B00D /* GamesHubView.swift in Sources */, Z1B00E /* MatchItGameView.swift in Sources */, Z1B00F /* FindItGameView.swift in Sources */, Z1B010 /* FillBlankGameView.swift in Sources */, Z1B011 /* ProgressTabView.swift in Sources */, Z1B012 /* ParentGateView.swift in Sources */, Z1B013 /* ParentDashboardView.swift in Sources */, Z1B014 /* CharacterCardView.swift in Sources */, Z1B015 /* ConfettiView.swift in Sources */, Z1B016 /* BadgeView.swift in Sources */, Z1B017 /* SpeakButton.swift in Sources */, Z1B018 /* SpeechManager.swift in Sources */, Z1B019 /* HapticManager.swift in Sources */, Z1B01A /* Theme.swift in Sources */, Z1B01B /* PlatformColor.swift in Sources */, Z1B01D /* PhonicsWord.swift in Sources */, Z1B01E /* PhonicsWordData.swift in Sources */, Z1B01F /* PhonicsViewModel.swift in Sources */, Z1B020 /* PhonicsView.swift in Sources */, Z1B021 /* PhonicsWordCard.swift in Sources */, Z1B022 /* SoundMatchGameView.swift in Sources */, Z1B023 /* SpellItGameView.swift in Sources */, Z1B024 /* RhymeTimeGameView.swift in Sources */, Z1B025 /* MemoryMatchGameView.swift in Sources */, Z1B026 /* PhonicsPhonemeMap.swift in Sources */, Z1B027 /* Avatar.swift in Sources */, Z1B028 /* WorldMapViewModel.swift in Sources */, Z1B029 /* ZoyaAvatarView.swift in Sources */, Z1B02A /* StarJarView.swift in Sources */, Z1B02C /* MapLocationNode.swift in Sources */, Z1B02D /* WorldMapView.swift in Sources */, Z1B02E /* WorldRootView.swift in Sources */, Z1B02F /* AvatarPickerView.swift in Sources */, Z1B030 /* LetterHouseView.swift in Sources */, Z1B031 /* ArtCornerView.swift in Sources */, Z1B032 /* LibraryTreeView.swift in Sources */, Z1B033 /* BackyardView.swift in Sources */, Z1B034 /* TrophyShedView.swift in Sources */, Z1B035 /* SoundManager.swift in Sources */, Z1B036 /* TodaysLesson.swift in Sources */, Z1B037 /* LetterQuizView.swift in Sources */); runOnlyForDeploymentPostprocessing = 0; };
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */

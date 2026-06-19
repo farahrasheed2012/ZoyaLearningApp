@@ -20,11 +20,19 @@ final class SpeechManager: NSObject, ObservableObject {
 
     func speak(_ text: String) {
         stopSequence()
-        synthesizer.speak(makeUtterance(text, rate: 0.4))
+        synthesizer.speak(makeUtterance(text, rate: 0.42))
     }
 
     func speakLetterAndWord(_ item: LearningItem) {
-        speak("\(item.character)... \(item.exampleWord)")
+        if item.type == .letter {
+            speak("\(item.soundSpeak)... \(item.exampleWord.lowercased())")
+        } else {
+            speak("\(item.character)... \(item.exampleWord)")
+        }
+    }
+
+    func speakLetterSound(_ item: LearningItem) {
+        speak(item.soundSpeak)
     }
 
     func speakWord(_ word: PhonicsWord) {
