@@ -14,6 +14,8 @@ struct LetterQuizView: View {
     @State private var feedback: String?
     @State private var passed = false
 
+    private var letterAccent: Color { ZLTheme.accent(for: item.character) }
+
     var body: some View {
         NavigationStack {
             VStack(spacing: 24) {
@@ -23,7 +25,7 @@ struct LetterQuizView: View {
 
                 Text("Which letter says")
                     .font(ZLTheme.bodyFont)
-                    .foregroundStyle(ZLTheme.earth)
+                    .foregroundStyle(ZLTheme.ink.opacity(0.75))
 
                 Text("/\(item.soundLabel)/")
                     .font(.system(size: 48, weight: .bold, design: .rounded))
@@ -31,11 +33,12 @@ struct LetterQuizView: View {
 
                 Text("like \(item.exampleWord.lowercased()) \(item.exampleEmoji)")
                     .font(ZLTheme.bodyFont)
-                    .foregroundStyle(ZLTheme.earth)
+                    .foregroundStyle(ZLTheme.ink.opacity(0.75))
 
-                SpeakButton(label: "Hear the sound") {
+                SpeakButton(label: "Hear the sound", tint: letterAccent) {
                     SpeechManager.shared.speakLetterSound(item)
                 }
+                .padding(.horizontal)
 
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
                     ForEach(choices, id: \.self) { choice in
@@ -44,15 +47,16 @@ struct LetterQuizView: View {
                         } label: {
                             Text(choice)
                                 .font(.system(size: 44, weight: .bold, design: .rounded))
+                                .foregroundStyle(ZLTheme.ink)
                                 .frame(maxWidth: .infinity, minHeight: 72)
                                 .background(ZLTheme.whiteSoft)
                                 .clipShape(RoundedRectangle(cornerRadius: 18))
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 18)
-                                        .stroke(ZLTheme.earth.opacity(0.3), lineWidth: 2)
+                                        .stroke(ZLTheme.earth.opacity(0.45), lineWidth: 2)
                                 )
                         }
-                        .buttonStyle(ScaleButtonStyle())
+                        .buttonStyle(.plain)
                         .disabled(passed)
                     }
                 }
@@ -61,19 +65,22 @@ struct LetterQuizView: View {
                 if let feedback {
                     Text(feedback)
                         .font(ZLTheme.bodyFont)
-                        .foregroundStyle(passed ? ZLTheme.grass : ZLTheme.blush)
+                        .foregroundStyle(passed ? ZLTheme.grass : ZLTheme.earth)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
                 }
 
-                Spacer()
+                Spacer(minLength: 0)
             }
             .padding(.vertical)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(ZLTheme.cream)
             .navigationTitle(item.displayPair)
             .inlineNavTitle()
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Close") { onDismiss() }
+                        .foregroundStyle(ZLTheme.ink)
                 }
             }
             .onAppear {
@@ -81,6 +88,10 @@ struct LetterQuizView: View {
                 SpeechManager.shared.speakLetterSound(item)
             }
         }
+        .preferredColorScheme(.light)
+        #if os(macOS)
+        .frame(minWidth: 420, minHeight: 520)
+        #endif
     }
 
     private func answer(_ choice: String) {

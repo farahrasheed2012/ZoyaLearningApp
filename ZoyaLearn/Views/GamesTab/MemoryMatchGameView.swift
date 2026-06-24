@@ -46,7 +46,6 @@ private struct MemoryCard: Identifiable {
     let glyph: String
     let word: String
     let emoji: String
-    let isEmojiFace: Bool
 }
 
 struct MemoryMatchGameView: View {
@@ -66,7 +65,7 @@ struct MemoryMatchGameView: View {
             VStack(spacing: 18) {
                 settingsBar
 
-                Label("Match letters & numbers to their pictures", systemImage: "square.grid.2x2.fill")
+                Label("Find two matching pictures", systemImage: "square.grid.2x2.fill")
                     .font(ZLTheme.Game.subtitle)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
@@ -126,7 +125,7 @@ struct MemoryMatchGameView: View {
                 startGame()
             }
 
-            Text("\(gridSize.rawValue) grid · \(gridSize.pairCount) pairs · letters, numbers & emojis")
+            Text("\(gridSize.rawValue) grid · \(gridSize.pairCount) pairs · flip two matching cards")
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
@@ -154,24 +153,13 @@ struct MemoryMatchGameView: View {
 
                 if isFaceUp {
                     VStack(spacing: 6) {
-                        if card.isEmojiFace {
-                            Text(card.emoji)
-                                .font(ZLTheme.Game.optionEmoji)
-                        } else {
-                            Text(card.glyph)
-                                .font(ZLTheme.Game.tileCharacter)
-                                .foregroundStyle(ZLTheme.accent(for: card.glyph))
-                        }
+                        Text(card.emoji)
+                            .font(ZLTheme.Game.optionEmoji)
 
                         if isMatched {
-                            HStack(spacing: 4) {
-                                Text(card.glyph)
-                                    .font(.caption.weight(.bold))
-                                Text("·")
-                                Text(card.isEmojiFace ? card.emoji : card.word)
-                                    .font(.caption)
-                            }
-                            .foregroundStyle(ZLTheme.accent(for: card.glyph))
+                            Text("\(card.glyph) · \(card.word)")
+                                .font(.caption.weight(.semibold))
+                                .foregroundStyle(ZLTheme.accent(for: card.glyph))
                         }
                     }
                 } else {
@@ -185,7 +173,7 @@ struct MemoryMatchGameView: View {
         .buttonStyle(ScaleButtonStyle())
         .disabled(isMatched || lockInput)
         .accessibilityLabel(isFaceUp
-            ? (card.isEmojiFace ? "Picture \(card.word)" : "Letter or number \(card.glyph)")
+            ? "Picture \(card.word), \(card.glyph)"
             : "Hidden card")
     }
 
@@ -251,15 +239,13 @@ struct MemoryMatchGameView: View {
                 pairID: pairID,
                 glyph: item.character,
                 word: item.exampleWord,
-                emoji: item.exampleEmoji,
-                isEmojiFace: false
+                emoji: item.exampleEmoji
             ))
             deck.append(MemoryCard(
                 pairID: pairID,
                 glyph: item.character,
                 word: item.exampleWord,
-                emoji: item.exampleEmoji,
-                isEmojiFace: true
+                emoji: item.exampleEmoji
             ))
         }
 
